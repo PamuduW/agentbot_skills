@@ -1,0 +1,4 @@
+interface:
+  display_name: "Co-Council"
+  short_description: "Codex subagent council and routing"
+  default_prompt: "Use $co-council to explore this area with focused Codex subagents."
