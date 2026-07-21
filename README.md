@@ -9,7 +9,7 @@ registers this repository in `skills.sources.yaml` with `skills: all`.
 
 | Skill | Purpose |
 |-------|---------|
-| `co-council` | Explore a codebase through focused Codex subagents with evidence-based Luna-tier routing. |
+| `co-council` | Run a bounded Luna-only Codex subagent council with enforced routing, parent-owned synthesis, and quota guardrails. |
 
 Each published skill follows the Skills CLI layout:
 

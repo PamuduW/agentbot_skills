@@ -1,37 +1,133 @@
 ---
 name: co-council
-description: "Explores a codebase or problem area through focused Codex subagents, assigns each delegate 5.6 Luna Low, Medium, High, or Extra High according to task complexity and risk, then synthesizes verified findings. Use for multi-area codebase review, reconnaissance before planning, architecture investigation, parallel research, or bounded implementation work that benefits from independent delegates."
+description: "Runs a bounded, Luna-only Codex subagent council for independent reconnaissance, review, debugging, or non-overlapping implementation. Enforces explicit GPT-5.6 Luna model routing when the active spawn interface supports it, keeps synthesis and integration in the parent, and stops rather than silently inheriting an unintended parent model."
 ---
 
 # Co-Council
 
-1. Scope the question before delegating. Identify independent partitions, the required output, write ownership, and the evidence each delegate must return.
-2. Check repo-local instructions and the current subagent interface before fan-out. Respect its concurrency limit and whether it supports an explicit model-selection argument.
-3. Choose a model **in the parent** for every delegate using [`references/codex-subagent-workflow.md`](references/codex-subagent-workflow.md). Do not ask a worker to select its own model.
-4. Delegate only independent work in parallel. Use `spawn_agent` for Codex delegates, give each a unique task name, and provide only the task-local context it needs.
-5. Make some delegates on-brief and, when useful, add one off-angle delegate for failure modes, cross-cutting impact, or alternative explanations. Do not create duplicate scouts.
-6. Keep exploration, review, and judgment delegates read-only. Assign a writer a non-overlapping ownership boundary; serialize overlapping edits.
-7. Inspect returned artifacts and relevant repository state yourself. Reconcile contradictions with primary evidence. Use one targeted follow-up delegate only if a material uncertainty remains.
-8. Deliver the requested result or planning input; do not merely relay a bundle of subagent summaries.
+Use this skill only when at least two concrete subtasks can run independently or
+when one independent reviewer would materially reduce risk.
 
-## Model-routing contract
+The parent remains responsible for the user’s requirements, architectural
+judgment, final plan or artifact, integration, validation, and completion report.
+This is delegation-first, not delegation-only.
 
-Select `5.6 luna low` for mechanical, tightly bounded work: file inventories, symbol searches, narrow documentation lookup, and simple test or log inspection.
+Read
+[`references/codex-subagent-workflow.md`](references/codex-subagent-workflow.md)
+before the first fan-out. Read
+[`references/runtime-compatibility.md`](references/runtime-compatibility.md)
+when the active Codex spawn interface is missing fields, rejects a spawn, or
+starts a child without executing its task.
 
-Select `5.6 luna medium` for bounded work that still needs interpretation: codebase mapping, focused code review against explicit criteria, independent reproduction, and contract tracing within one subsystem.
+## Required workflow
 
-Select `5.6 luna high` for work needing multi-step reasoning or meaningful judgment: architecture analysis, cross-module tracing, implementation, debugging ambiguous failures, and non-critical reliability review.
+1. Read the complete request, repository instructions, and enough primary
+   evidence to identify the critical path.
+2. Decide what the parent should do locally now. Do not delegate the immediate
+   blocking task or routine file operations.
+3. Identify independent delegate tasks, exact scopes, read/write permissions,
+   expected evidence, and integration boundaries.
+4. Inspect the active `spawn_agent` schema. Treat the live schema and its
+   available-model list as the source of truth.
+5. Enforce the capability gate below before spawning.
+6. Select a Luna reasoning effort in the parent. A worker never chooses its own
+   model or effort.
+7. Spawn the smallest useful council with self-contained task messages.
+8. Continue meaningful non-overlapping parent work while delegates run. Do not
+   repeatedly poll by reflex.
+9. Inspect every returned artifact, diff, test result, and material claim.
+10. Resolve contradictions with primary evidence. Use at most one targeted
+    follow-up or one bounded escalation.
+11. Deliver one integrated result. Do not relay a bundle of summaries as the
+    final answer.
 
-Select `5.6 luna extra high` for the highest-consequence or hardest work: security review, complex migrations, system-wide design decisions, difficult root-cause analysis, and final conflict resolution where wrong conclusions would be expensive.
+## Capability gate
 
-Prefer the lowest available tier that can produce dependable evidence. Escalate Low to Medium, Medium to High, or High to Extra High when a result is incomplete, contradictory, or needs deeper reasoning; do not re-run the entire council.
+A model-routed council may launch only when all of the following are true:
 
-The requested Luna tier is a routing decision, not a claim that every Codex runtime can enforce it. If the active `spawn_agent` interface exposes a model field or supported routing mechanism, set it explicitly. If it does not, state that model enforcement is unavailable in the current harness and continue only if inherited routing is acceptable; never pretend the requested tier was applied.
+- the active spawn interface exposes `model`;
+- the active spawn interface exposes `reasoning_effort`;
+- `gpt-5.6-luna` is present in the available model overrides or the active
+  interface otherwise confirms that exact model slug is accepted;
+- the selected effort is supported by that model;
+- the delegate task can be expressed without copying the entire parent context.
 
-## Fan-out rules
+When the gate passes, every spawn must explicitly set:
 
-- Use two to four delegates for distinct concerns; add more only for genuinely independent partitions.
-- Keep a parent-owned ledger of each delegate's scope, requested tier, write permission, and expected evidence.
-- For broad work, start with Low scouts where the questions are mechanical, use Medium for interpreted findings, High for integration or high-risk areas, and reserve Extra High for the hardest bounded question or a single disagreement resolver.
-- Avoid concurrent writers that touch the same files. Give each writer an explicit path boundary and verify its diff before synthesis.
-- Stop when the evidence answers the user’s question. A council is a means to an outcome, not a mandatory ceremony.
+```text
+model: gpt-5.6-luna
+reasoning_effort: medium | high | xhigh | max
+```
+
+Use `fork_turns: "none"` by default for bounded workers. Use a small positive
+turn count only when the delegate genuinely needs recent conversation context
+and the active interface supports it. Avoid full-history forks for routed
+delegates unless the current runtime explicitly supports the combination and the
+extra context is necessary.
+
+Omit `agent_type` unless a configured custom role is explicitly required.
+
+If the gate fails, do not silently spawn agents that inherit the parent model.
+Report that Luna routing cannot be enforced in the current Codex build and
+continue locally. Inherited routing is allowed only after explicit user
+authorization.
+
+## Luna routing
+
+| Lane | Exact effort | Use for |
+|---|---|---|
+| Scout | `medium` | Bounded codebase mapping, symbol or contract tracing, focused logs/tests, narrow documentation research, explicit checklist verification. |
+| Worker | `high` | Default bounded implementation, multi-file tracing, focused debugging, subsystem analysis, and meaningful review. |
+| Deep | `xhigh` | Ambiguous failures, cross-module reasoning, security/reliability review, difficult integration questions, or an independent final review. |
+| Escalation | `max` | One hardest bounded question after a lower effort failed, or a highest-consequence decision where extra verification is justified. |
+
+Do not use Luna Low. Mechanical file creation, deletion, known-file reads, and
+routine commands should normally remain in the parent.
+
+Prefer the lowest lane likely to produce dependable evidence. Escalate one
+specific task; never rerun the whole council at a stronger effort.
+
+## Council budget
+
+Unless the user explicitly authorizes a different bounded budget:
+
+- planning or reconnaissance: normally 2–3 delegates; hard maximum 4;
+- implementation: normally 0–2 delegates; hard maximum 3 per phase;
+- concurrent writers: maximum 2 with disjoint ownership;
+- `xhigh` or `max` delegates: maximum 1 total per council;
+- follow-up after the initial fan-out: maximum 1 targeted delegate;
+- nested or recursive spawning: prohibited;
+- duplicate scouts: prohibited.
+
+“Use as many agents as needed” is not authorization for unlimited fan-out.
+
+## Delegate brief contract
+
+Every delegate message must include:
+
+- one objective;
+- exact repository, directory, file, or subsystem scope;
+- read-only or write permission;
+- relevant requirements and non-goals;
+- expected evidence or files changed;
+- required validation;
+- a compact response format;
+- an instruction not to spawn subagents.
+
+For write tasks, assign a disjoint path boundary and require the final response
+to list changed files and checks run.
+
+## Parent ownership
+
+The parent should normally perform directly:
+
+- known-file reads and small searches;
+- routine shell commands;
+- simple file creation, deletion, or movement;
+- small or tightly coupled edits;
+- final plan writing;
+- integration and conflict resolution;
+- final diff inspection and validation.
+
+The parent must not use subagents to avoid understanding the repository or the
+requirements.

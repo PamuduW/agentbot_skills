@@ -1,4 +1,4 @@
 interface:
   display_name: "Co-Council"
-  short_description: "Codex subagent council and routing"
-  default_prompt: "Use $co-council to explore this area with focused Codex subagents."
+  short_description: "Bounded Luna-only Codex council"
+  default_prompt: "Use $co-council to delegate only independent Codex subtasks to explicitly routed GPT-5.6 Luna agents, keep synthesis and integration in the parent, and stop if the requested routing cannot be enforced."
