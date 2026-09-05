@@ -2,7 +2,7 @@
 
 Public personal skills for the [Vercel Skills CLI](https://skills.sh/).
 This repository is intentionally a small Skills CLI source repository, not a
-second bootstrap application. `agent_bootstrap` owns installation policy and
+second bootstrap application. `agentbot` owns installation policy and
 registers this repository in `skills.sources.yaml` with `skills: all`.
 
 ## Published skills
@@ -38,15 +38,15 @@ machine-specific paths, generated lockfiles, or copied upstream skill trees.
 
 ## Installation through Agentbot
 
-The live `agent_bootstrap` manifest contains:
+The live `agentbot` manifest contains:
 
 ```yaml
 - id: pamudu-agent-bootstrap-skills
-  repo: PamuduW/agent_bootstrap_skills
+  repo: PamuduW/agentbot_skills
   skills: all
 ```
 
-From the sibling `agent_bootstrap` repository, install or refresh the managed
+From the sibling `agentbot` repository, install or refresh the managed
 global skill set with:
 
 ```bash

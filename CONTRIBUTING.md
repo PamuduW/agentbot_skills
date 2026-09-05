@@ -29,4 +29,4 @@ Before opening a change, confirm that:
 - the change does not vendor an upstream repository or generated install tree.
 
 The repository does not auto-install or auto-publish skills. Installation and
-global lock updates happen through the consuming `agent_bootstrap` repository.
+global lock updates happen through the consuming `agentbot` repository.

@@ -15,10 +15,10 @@ repository.
 - Do not add credentials, private paths, generated lockfiles, or vendored
   upstream trees.
 - Validate with `npx skills add . --list` and `git diff --check`.
-- Do not change `agent_bootstrap/skills.sources.yaml` from this repository;
-  manifest registration belongs to the consuming `agent_bootstrap` repo.
+- Do not change `agentbot/skills.sources.yaml` from this repository;
+  manifest registration belongs to the consuming `agentbot` repo.
 
 ## Scope boundary
 
-`agent_bootstrap` owns installation, global pins, Agentbot menus, and rendering.
+`agentbot` owns installation, global pins, Agentbot menus, and rendering.
 This repository owns only the published skill content and its public metadata.
