@@ -1,15 +1,20 @@
 ---
 name: agent-memory
-description: "Recall and propose durable personal memory through the agentbot memory CLI. Use when prior decisions, lessons, preferences, or project context would change the work, when the user asks what was decided or learned before, or when the user asks to remember something. Reads validated records; writes only review drafts; approval stays with the human."
+description: "The user's memory lives in a vault read only through the agentbot memory CLI. Use for ANY question about what you remember, know, or have saved about the user (preferences, past decisions, lessons, project context), before answering from a client's built-in memory, and whenever the user asks you to remember something. Reads validated records; writes only review drafts; approval stays with the human."
 ---
 
 # Agent memory
 
 The user's durable memory is a private Markdown vault owned by the
 `agentbot memory` CLI. The CLI validates every record, enforces scope and
-token limits, and is the only way to read or propose memory. Client-native
-memory is advisory: when it disagrees with an accepted vault record, the
-record wins.
+token limits, and is the only way to read or propose memory.
+
+A client's built-in memory (for example `~/.codex/memories/` or a Claude
+project memory folder) is not the user's memory. When asked what you remember
+about the user, run the CLI first and answer from its records. Mention
+built-in memory only as a separate, unverified source, and never read those
+files to answer a memory question. When the two disagree, the vault record
+wins.
 
 ## Recall
 
@@ -59,7 +64,8 @@ EOF
 Never run these, even when asked to "finish" or "clean up"; tell the user the
 command instead:
 
-- `agentbot memory approve ... --yes`
+- `agentbot memory approve drafts/FILE.md --yes` (give the user this exact
+  command with the draft's path)
 - `agentbot memory migrate apply|rollback ... --yes`
 - `agentbot memory hook install|remove --yes`
 - `agentbot memory backup|restore ... --yes`
