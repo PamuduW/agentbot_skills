@@ -3,8 +3,8 @@
 ## Project
 
 This repository is the public Skills CLI source for Pamudu’s personal skills.
-It currently publishes `co-council` and should remain a small, portable skills
-repository.
+It currently publishes `agent-memory` and `co-council` and should remain a
+small, portable skills repository.
 
 ## Working rules
 
