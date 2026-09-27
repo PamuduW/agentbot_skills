@@ -49,8 +49,8 @@ failure and its verified fix, a project convention, a tool quirk, the current
 handoff. Never store transcripts, secrets, code that is already in the repo,
 generic advice, or guesses about the user. Writes sync automatically.
 
-If `memory project` says the repository is unregistered, tell the user it
-can be given memory with `agentbot memory project register`.
+If `memory project` says the repository is unregistered, tell the user
+`agentbot boot` in the repository gives it project memory.
 
 ## Core memory (the user approves)
 
