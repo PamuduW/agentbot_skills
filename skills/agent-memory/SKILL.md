@@ -44,6 +44,10 @@ agentbot memory project delete PATH       # clear duplicates only
 agentbot memory project maintain          # when a write warns; then act on it
 ```
 
+Agentbot writes the `up` and `replaces` links Obsidian draws; never edit
+them. To connect a record to another one, cite it in the body as
+`[[projects/<folder>/<dir>/<file>]]` (its vault path without `.md`).
+
 Store only what changes future work: a decision and its reason, a recurring
 failure and its verified fix, a project convention, a tool quirk, the current
 handoff. Never store transcripts, secrets, code that is already in the repo,
