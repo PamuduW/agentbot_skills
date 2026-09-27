@@ -74,7 +74,9 @@ mine|theirs`. For a core conflict, tell the user.
 
 ## Human-only actions
 
-Never run these; give the user the command instead:
+Never run these, even when the user asks you to; give the user the command to
+run in their own terminal instead. Approve, reject, and core conflict
+resolution refuse without a terminal and ask for a typed code.
 
 - `agentbot memory approve PATH --yes` and `agentbot memory reject PATH --yes`
 - `agentbot memory conflict resolve` for a core conflict
