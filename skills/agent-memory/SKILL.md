@@ -80,7 +80,8 @@ Tell the user the proposal path and that it awaits their approval.
 
 `agentbot memory conflict list` shows writes another machine changed first.
 For a project conflict, `conflict show OP`, then `conflict resolve OP --keep
-mine|theirs`. For a core conflict, tell the user.
+mine|theirs`, run from that project's repository (it is refused anywhere
+else). For a core conflict, tell the user.
 
 ## Human-only actions
 
@@ -92,5 +93,5 @@ resolution refuse without a terminal and ask for a typed code.
 - `agentbot memory conflict resolve` for a core conflict
 - `agentbot memory project link ... --yes`, and `project forget --yes` unless
   the user asked to forget this project
-- `agentbot memory setup`, `sync --mode`, `migrate`, `hook`, `backup`, `restore`
+- `agentbot memory setup`, `sync --mode`, `hook`, `backup`, `restore`
 - any `git` command inside the vault, or reading or editing vault files directly
