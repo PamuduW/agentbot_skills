@@ -74,7 +74,9 @@ EOF
 agentbot memory project promote PATH [--scope global]   # a project lesson that holds everywhere
 ```
 
-Tell the user the proposal path and that it awaits their approval.
+Tell the user the proposal path and that it awaits their approval: they run
+`agentbot memory review` in their own terminal, which shows each proposal and
+asks approve, reject, skip, or stop.
 
 ## Conflicts
 
