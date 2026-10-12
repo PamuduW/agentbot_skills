@@ -1,6 +1,6 @@
 ---
 name: co-council
-description: "Runs a bounded, Luna-only Codex subagent council for independent reconnaissance, review, debugging, or non-overlapping implementation. Enforces explicit GPT-5.6 Luna model routing when the active spawn interface supports it, keeps synthesis and integration in the parent, and stops rather than silently inheriting an unintended parent model."
+description: "Runs a bounded, Luna-only Codex subagent council for independent reconnaissance, review, debugging, or non-overlapping implementation. Enforces explicit GPT-6 Luna model routing when the active spawn interface supports it, keeps synthesis and integration in the parent, and stops rather than silently inheriting an unintended parent model."
 ---
 
 # Co-Council
@@ -47,7 +47,7 @@ A model-routed council may launch only when all of the following are true:
 
 - the active spawn interface exposes `model`;
 - the active spawn interface exposes `reasoning_effort`;
-- `gpt-5.6-luna` is present in the available model overrides or the active
+- `gpt-6-luna` is present in the available model overrides or the active
   interface otherwise confirms that exact model slug is accepted;
 - the selected effort is supported by that model;
 - the delegate task can be expressed without copying the entire parent context.
@@ -55,7 +55,7 @@ A model-routed council may launch only when all of the following are true:
 When the gate passes, every spawn must explicitly set:
 
 ```text
-model: gpt-5.6-luna
+model: gpt-6-luna
 reasoning_effort: medium | high | xhigh | max
 ```
 

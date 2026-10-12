@@ -60,7 +60,7 @@ message: |
   2. Evidence: path + symbol
   3. Risks or uncertainty
   4. Recommended parent action
-model: gpt-5.6-luna
+model: gpt-6-luna
 reasoning_effort: medium
 fork_turns: none
 ```
