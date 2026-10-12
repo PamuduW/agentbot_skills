@@ -1,0 +1,112 @@
+diff --git b/LICENSE b/LICENSE
+new file mode 100644
+index 0000000..abf0390
+--- /dev/null
++++ b/LICENSE
+@@ -0,0 +1,21 @@
++MIT License
++
++Copyright (c) 2025 Jesse Vincent
++
++Permission is hereby granted, free of charge, to any person obtaining a copy
++of this software and associated documentation files (the "Software"), to deal
++in the Software without restriction, including without limitation the rights
++to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++copies of the Software, and to permit persons to whom the Software is
++furnished to do so, subject to the following conditions:
++
++The above copyright notice and this permission notice shall be included in all
++copies or substantial portions of the Software.
++
++THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++SOFTWARE.
+diff --git a/SKILL.md b/SKILL.md
+index 46838cc..3d563d0 100644
+--- a/SKILL.md
++++ b/SKILL.md
+@@ -34,15 +34,14 @@ Thinking "skip TDD just this once"? Stop. That's rationalization.
+ NO PRODUCTION CODE WITHOUT A FAILING TEST FIRST
+ ```
+ 
+-Write code before the test? Delete it. Start over.
++Code you write in this task starts from a failing test. If you wrote some of
++it before its test, set your draft aside (stash it, or move it out of the
++build), write the failing test, and rebuild it from the test rather than
++adapting the draft.
+ 
+-**No exceptions:**
+-- Don't keep it as "reference"
+-- Don't "adapt" it while writing tests
+-- Don't look at it
+-- Delete means delete
+-
+-Implement fresh from tests. Period.
++Code that existed before the task, or that the user wrote, belongs to the user:
++never delete or rewrite it to restart. Add tests that pin its current behavior
++first, then change it test-first.
+ 
+ ## Red-Green-Refactor
+ 
+@@ -112,7 +111,7 @@ Vague name, tests mock not code
+ 
+ ### Verify RED - Watch It Fail
+ 
+-**MANDATORY. Never skip.**
++Always run it, and confirm it fails for the reason you expect.
+ 
+ ```bash
+ npm test path/to/test.test.ts
+@@ -167,7 +166,7 @@ Don't add features, refactor other code, or "improve" beyond the test.
+ 
+ ### Verify GREEN - Watch It Pass
+ 
+-**MANDATORY.**
++Run it, and confirm it passes with no other test newly failing.
+ 
+ ```bash
+ npm test path/to/test.test.ts
+@@ -228,7 +227,7 @@ When writing or changing any test, read [writing-good-tests.md](writing-good-tes
+ | "Tests after achieve same goals (spirit not ritual)" | Tests-after answer "what does this do?"; tests-first answer "what should this do?" Tests written after are biased by the code you already wrote — you verify the cases you remembered, not the ones you'd have discovered. Coverage without proof the tests work. |
+ | "Already manually tested" | Manual testing is ad-hoc: no record of what you covered, no way to re-run it when the code changes, easy to forget cases under pressure. "Worked when I tried it" ≠ comprehensive. Automated tests run the same way every time. |
+ | "Deleting X hours is wasteful" | Sunk cost fallacy — that time is already spent either way. The real choice: rewrite with TDD (high confidence) vs. keep it and bolt tests on after (low confidence, likely bugs). Keeping code you can't trust is the waste. |
+-| "Keep as reference, write tests first" | You'll adapt it. That's testing after. Delete means delete. |
++| "Keep as reference, write tests first" | You'll adapt it, which is testing after. Set your own draft aside and rebuild from the test; code the user already had stays. |
+ | "Need to explore first" | Fine. Throw away exploration, start with TDD. |
+ | "Test hard = design unclear" | Listen to test. Hard to test = hard to use. |
+ | "TDD will slow me down" | TDD IS the pragmatic path: catches bugs before commit, prevents regressions, lets you refactor without fear. "Pragmatic" shortcuts mean debugging in production — slower, not faster. |
+@@ -251,7 +250,7 @@ When writing or changing any test, read [writing-good-tests.md](writing-good-tes
+ - "TDD is dogmatic, I'm being pragmatic"
+ - "This is different because..."
+ 
+-**All of these mean: Delete code. Start over with TDD.**
++**All of these mean: set aside the code you wrote in this task and rebuild it from a failing test. Code that was already there stays; add tests around it.**
+ 
+ ## Example: Bug Fix
+ 
+@@ -328,3 +327,8 @@ Otherwise → not TDD
+ ```
+ 
+ No exceptions without your human partner's permission.
++
++---
++
++Adapted from [obra/superpowers](https://github.com/obra/superpowers) v7.0.0
++(MIT, Copyright (c) 2025 Jesse Vincent; see `LICENSE`).
+diff --git a/writing-good-tests.md b/writing-good-tests.md
+index d3c4482..c39b737 100644
+--- a/writing-good-tests.md
++++ b/writing-good-tests.md
+@@ -48,7 +48,7 @@ retried 5 times and the 6th attempt never happens."
+ contains an exact line proves only that the source is the source. Run
+ scripts against controlled inputs and assert outputs, side effects, or
+ exit codes. Documents that instruct agents are tested by the consuming
+-agent's behavior (superpowers:writing-skills); prose for humans earns no
++agent's behavior (writing-skills); prose for humans earns no
+ test at all.
+ 
+ **Your code, not the framework.** Test the contract your code makes at
