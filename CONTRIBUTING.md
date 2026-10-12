@@ -1,7 +1,7 @@
 # Contributing skills
 
 This repository publishes small, reusable Agent Skills. Keep contributions
-portable across Codex, Claude Code, Cursor, and GitHub Copilot.
+portable across Claude Code, Codex, Cursor CLI, and the Antigravity CLI.
 
 ## Skill contract
 
