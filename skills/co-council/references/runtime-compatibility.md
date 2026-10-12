@@ -12,7 +12,7 @@ Required for enforced Luna routing:
 
 - `model`;
 - `reasoning_effort`;
-- an accepted `gpt-5.6-luna` override;
+- an accepted `gpt-6-luna` override;
 - the selected supported effort.
 
 Useful optional fields:
@@ -49,7 +49,7 @@ Do not continue silently.
 
 Report:
 
-> Co-Council cannot enforce `gpt-5.6-luna` routing in this Codex build because
+> Co-Council cannot enforce `gpt-6-luna` routing in this Codex build because
 > the active spawn interface does not expose the required model and reasoning
 > overrides. I will continue locally unless you explicitly authorize inherited
 > parent-model subagents.
@@ -59,7 +59,7 @@ child model.
 
 ## When Luna is unavailable
 
-If `gpt-5.6-luna` is absent from the live model override list or the spawn call
+If `gpt-6-luna` is absent from the live model override list or the spawn call
 rejects it:
 
 1. stop additional fan-out;
