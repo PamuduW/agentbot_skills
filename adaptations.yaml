@@ -1,0 +1,21 @@
+# Skills in this repository that are adaptations of an upstream skill.
+#
+# Agentbot reads this on every `agentbot update`: it compares the Git tree hash
+# of `path` in the upstream repository's current clone with `tree`, the hash at
+# `commit`, and reports "upstream changed since <commit>" when they differ.
+# Nothing updates on its own. To bring an adaptation up to date, follow
+# adaptations/README.md, then record the new commit and tree here.
+version: 1
+adaptations:
+  - skill: brainstorming
+    upstream: obra/superpowers
+    path: skills/brainstorming
+    commit: bb92a77741419a4ab5f06e711a283343f1ada0c3
+    tree: abe5c2fed8c215d4b86b77be1d8a7d0b0562651c
+    patch: adaptations/brainstorming.patch
+  - skill: test-driven-development
+    upstream: obra/superpowers
+    path: skills/test-driven-development
+    commit: bb92a77741419a4ab5f06e711a283343f1ada0c3
+    tree: 847144cf0824095922c0d4875648b9fa74877e1a
+    patch: adaptations/test-driven-development.patch
