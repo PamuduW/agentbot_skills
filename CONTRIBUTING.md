@@ -20,6 +20,10 @@ npx skills add . --list
 git diff --check
 ```
 
+CI runs the same on every push to `main` and `development`
+(`.github/workflows/validate.yml`), and also checks that each `SKILL.md` names
+its own folder and has a description, and runs `zizmor` over the workflow.
+
 Before opening a change, confirm that:
 
 - the Skills CLI discovers the intended skill names;
