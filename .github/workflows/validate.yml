@@ -1,0 +1,61 @@
+name: Validate
+
+# Every skill here reaches every agent the operator runs, through Agentbot's
+# Skills CLI install. So each push checks what that install depends on: the
+# Skills CLI discovers every skill folder, each SKILL.md has front matter naming
+# its own folder and a description, and the workflow itself is clean.
+on:
+  push:
+    branches: [main, development]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: lts/*
+      - name: Front matter names its folder and has a description
+        run: |
+          python3 - <<'PY'
+          import pathlib, re, sys
+          failed = False
+          folders = sorted(p for p in pathlib.Path("skills").iterdir() if p.is_dir())
+          for folder in folders:
+              skill = folder / "SKILL.md"
+              text = skill.read_text(encoding="utf-8") if skill.is_file() else ""
+              match = re.match(r"---\n(.*?)\n---\n", text, re.S)
+              front = match.group(1) if match else ""
+              name = re.search(r"^name:\s*(\S+)\s*$", front, re.M)
+              description = re.search(r"^description:\s*\S", front, re.M)
+              if not (name and name.group(1) == folder.name and description):
+                  print(f"::error file={skill}::needs front matter with name: {folder.name} and a description")
+                  failed = True
+          print(f"{len(folders)} skill folder(s) checked")
+          sys.exit(1 if failed else 0)
+          PY
+      - name: The Skills CLI discovers every skill
+        run: |
+          expected="$(find skills -mindepth 1 -maxdepth 1 -type d | wc -l)"
+          listed="$(npx --yes skills add . --list 2>&1 | tee /dev/stderr)"
+          for folder in skills/*/; do
+            name="$(basename "$folder")"
+            grep -qw -- "$name" <<<"$listed" || { echo "::error::the Skills CLI did not list $name"; exit 1; }
+          done
+          echo "all $expected skill(s) listed"
+      - name: Workflow security
+        run: pipx run 'zizmor==1.30.1' --offline --quiet .github/workflows
+      - name: Whitespace errors
+        run: git diff --check
