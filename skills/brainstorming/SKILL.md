@@ -23,20 +23,28 @@ why?
   blue"). This is a quick, clear task. Do it, and say what you did.
 - **Something non-trivial is missing.** Start the conversation.
 
+## Look Before You Ask
+
+Before your first substantive question, read the context the user supplied and
+the existing work it refers to. Inspect the relevant implementation and tests
+when available. Establish what the request already settles, what the project
+already does, and which unanswered choice would materially change the result.
+Do not ask the user to repeat information in the brief or repository.
+
 ## Your First Message
 
-Your first message is two things, in this order:
+When the user supplies a brief, spec, or detailed request, give a few sentences
+about the relevant existing behavior and the one unresolved choice. Build your
+question on that evidence and explain what the answer changes. Do not restate
+the whole brief or ask a generic discovery question.
 
-1. One line letting them know that if they'd rather skip the questions and
-   have you just start, they can say so. If they take you up on it, this
-   skill is done: state any significant how-it-gets-made choice
-   (platform, language, medium) in one plain line, then do what they
-   asked through the normal workflow.
-2. One open question that gets them describing. Ask about a real moment
-   or a concrete picture: "What's the moment you find yourself wishing
-   this existed?" or "Tell me about the people who'll be in the room."
+For a request without that context, ask one open question about the biggest
+unsettled goal or constraint, in the user's own terms. Explain why it matters.
 
-That's the whole message.
+If they did not explicitly ask for brainstorming, end with a light offer to
+skip the questions and proceed. If they take it, this skill is done: state any
+significant implementation choice in one plain line, then follow the normal
+workflow. Do not repeat the offer when they already opted out.
 
 ## The Conversation
 
@@ -75,19 +83,23 @@ out as questions:
 - current state: what exists now, what they've tried
 - the details they care about
 
-**Questions that work** anchor in specifics: "Walk me through the last
-time...", "If it could only do one of these well, which?", "What would
-make you wince if I got it wrong?" A guess they can correct ("I'm
-guessing this is because X keeps biting you?") often beats a question.
+**Make questions specific.** Build each question on their last answer or on
+something you inspected. Explore an actual consequence or missed case rather
+than asking questions from a generic checklist. A proposal with its reason can
+be easier to correct than an abstract question. Label your proposal clearly;
+only the user's stated choices count as their decisions.
 
-**Offer recon.** Once you have a bit of grounding and looking would help,
-offer to go look: their codebase or project, their own files and data,
-or the web. Say what you'd look for. They decide whether you go.
+**Recon.** Use authorized read-only inspection to answer what the project can
+already tell you. If deeper work would expand the task's access, cost or scope,
+explain what it would resolve before asking for that expansion.
 
-**Think wide privately.** Before you propose anything, come up with
-several ideas and drop the weak ones, including any that fight what
-they've told you about why. Show the comparison only when it helps them
-decide.
+**Compare approaches when a choice matters.** Think through several real
+alternatives and discard those that conflict with the user's goals or the
+existing project. When a material implementation choice remains for the user,
+show two or three viable options, their tradeoffs, and your recommendation.
+When the project leaves one sensible approach, explain it briefly. Keep the
+existing sizing and approval workflow below; a comparison does not create a
+new requirement for a document or another approval.
 
 **Show, don't tell.** Offer the visual companion (below) whenever seeing
 would help more than reading:
@@ -117,8 +129,8 @@ behaves), describe that part back in about 200-300 words, then return to
 questions about the next part. Playback and questions alternate through
 the whole conversation; the last chunk covers whatever is left.
 
-Mark anything you're guessing as your guess; only what they said goes in
-as theirs. End each chunk by asking what's wrong or missing.
+Label anything you filled in as your proposal, with its reason; only what
+they said goes in as theirs. End each chunk by asking what's wrong or missing.
 
 Before you send a chunk, check it: does it describe something they'll
 look at, like a page, a screen, a schedule, or a printout? If so, and
@@ -226,5 +238,5 @@ starting the server.
 
 ---
 
-Adapted from [obra/superpowers](https://github.com/obra/superpowers) v7.0.0
+Adapted from [obra/superpowers](https://github.com/obra/superpowers) v7.0.1
 (MIT, Copyright (c) 2025 Jesse Vincent; see `LICENSE`).
