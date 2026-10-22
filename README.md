@@ -10,7 +10,7 @@ registers this repository in `skills.sources.yaml` with `skills: all`.
 | Skill | Purpose |
 |-------|---------|
 | `agent-memory` | Recall memory, keep project memory current, and propose core memory through the `agentbot memory` CLI; approval stays with the human. |
-| `brainstorming` | Find out what the person wants and why when a request leaves it unclear, before anything is planned or built. Adapted from obra/superpowers (MIT). |
+| `brainstorming` | Use existing context before asking about unclear goals or constraints; compare material approaches and preserve the normal sizing/approval workflow. Adapted from obra/superpowers (MIT). |
 | `co-council` | Run a bounded Luna-only Codex subagent council with enforced routing, parent-owned synthesis, and quota guardrails. |
 | `test-driven-development` | Red-green-refactor, where code the user already had gets tests added rather than being deleted. Adapted from obra/superpowers (MIT). |
 
