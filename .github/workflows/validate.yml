@@ -4,9 +4,11 @@ name: Validate
 # Skills CLI install. So each push checks what that install depends on: the
 # Skills CLI discovers every skill folder, each SKILL.md has front matter naming
 # its own folder and a description, and the workflow itself is clean.
+# Automatic triggers paused on 2026-11-08 while GitHub Actions billing is locked.
+# To resume, uncomment the triggers below and re-enable the hosted workflow.
 on:
-  push:
-    branches: [main, development]
+  # push:
+  #   branches: [main, development]
   workflow_dispatch:
 
 permissions:
