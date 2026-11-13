@@ -10,8 +10,8 @@ adaptations:
   - skill: brainstorming
     upstream: obra/superpowers
     path: skills/brainstorming
-    commit: 2ce8aa15d05bd57213e6f746f953aafb7ded7a8b
-    tree: 3d8a23691e919f5acfd31d45f76bdc168d24ca1b
+    commit: 22f0b463e7a5e579904dd6211a520321035526f7
+    tree: ebd5b1afb600976b12a4c07fedd9c408c1e82f97
     patch: adaptations/brainstorming.patch
   - skill: test-driven-development
     upstream: obra/superpowers

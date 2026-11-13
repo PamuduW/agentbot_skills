@@ -29,14 +29,17 @@ Before your first substantive question, read the context the user supplied and
 the existing work it refers to. Inspect the relevant implementation and tests
 when available. Establish what the request already settles, what the project
 already does, and which unanswered choice would materially change the result.
-Do not ask the user to repeat information in the brief or repository.
+Do not ask the user to repeat information in the brief or repository, or reopen
+choices they already settled.
 
 ## Your First Message
 
 When the user supplies a brief, spec, or detailed request, give a few sentences
-about the relevant existing behavior and the one unresolved choice. Build your
-question on that evidence and explain what the answer changes. Do not restate
-the whole brief or ask a generic discovery question.
+about the relevant existing behavior. If a material choice remains unresolved,
+build one question on that evidence and explain what the answer changes. If
+nothing material remains open, state your approach and continue through the
+normal workflow. Do not restate the whole brief or ask a generic discovery
+question.
 
 For a request without that context, ask one open question about the biggest
 unsettled goal or constraint, in the user's own terms. Explain why it matters.
@@ -48,27 +51,33 @@ workflow. Do not repeat the offer when they already opted out.
 
 ## The Conversation
 
-Each message ends with one question: a single sentence with no list of
-example answers hanging off it. Use plain language, pitched just a little
-above where your human partner is. Match their vocabulary; never use
-process jargon.
+Ask a question only when the answer would change what gets built and
+neither the request nor the project answers it. Otherwise, state your
+call and your reason as a proposal they can correct, and move the work
+forward. Process steps within the authorized scope are your calls: writing
+things up, where files go, looking further, how to show something. Do them
+and say so. Ask one question at a time. Use plain language, pitched just a
+little above where your human partner is. Match their vocabulary; never
+use process jargon.
 
 Be clear and concise. Lead with what matters. Avoid jargon. When you
 report what you found, give them the most important findings and offer
 the rest.
 
-**Get them describing.** Open questions come first. Their own words carry
-intent that your options can't. Offer a short menu only when they're
-stuck. When they say "just guess" or "what do you think?", propose
-something concrete.
+**Get them describing.** Until you know why they want it, ask open
+questions, with no example answers attached. Their own words carry
+intent that your options can't. Once you know why, when a decision has
+choices you can name, sketch each concretely, with what it trades off
+and which you'd pick. When they say "just guess" or "what do you think?",
+propose something concrete.
 
 **How it gets made.** Every project rests on choices about medium, tools,
 materials, and resources: the platform, programming language, and
-libraries for an app; the medium for a piece of art. Find out early which
-of those choices they want to make, which they're handing to you, and what
-they already have to work with. Someone with strong views or skills will
-want to talk it through. Someone counting on you needs sensible defaults,
-said in plain words. When there's existing work, build on what it already
+libraries for an app; the medium for a piece of art. Read from how they
+talk which of those choices they want to make. Someone who raises the how
+or asks about trade-offs wants the options with your pick. Someone who
+talks about outcomes is handing you the how: make those calls and state
+each in a line. When there's existing work, build on what it already
 uses. Any choice you make goes in the design as your call, never as
 something they agreed to.
 
@@ -101,8 +110,9 @@ When the project leaves one sensible approach, explain it briefly. Keep the
 existing sizing and approval workflow below; a comparison does not create a
 new requirement for a document or another approval.
 
-**Show, don't tell.** Offer the visual companion (below) whenever seeing
-would help more than reading:
+**Show, don't tell.** Whenever seeing would help more than reading,
+sketch it in text: a few lines of what they'd see. Offer the visual
+companion (below) when the look itself is theirs to decide:
 
 - something they'll look at: a screen, a page, a printout, a sign
 - a layout or arrangement: of a screen, a room, a schedule
@@ -133,10 +143,11 @@ Label anything you filled in as your proposal, with its reason; only what
 they said goes in as theirs. End each chunk by asking what's wrong or missing.
 
 Before you send a chunk, check it: does it describe something they'll
-look at, like a page, a screen, a schedule, or a printout? If so, and
-they haven't seen the visual companion offer yet, send the offer instead
-(its own message, below) and hold the chunk for the next message. Once
-they've accepted, put a mockup next to the description.
+look at, like a page, a screen, a schedule, or a printout? If so, put a
+text sketch next to the description. If the look itself is theirs to
+decide and they haven't seen the visual companion offer yet, send the
+offer instead (its own message, below) and hold the chunk for the next
+message. Once they've accepted, put a mockup next to the description.
 
 ## Size the Work
 
@@ -167,7 +178,8 @@ could plan from without going back to your human partner. Cover:
 
 **Where it goes:** in a software repo,
 `docs/superpowers/specs/YYYY-MM-DD-<topic>-design.md`, committed.
-Otherwise, ask. Your human partner's preferences override both.
+Otherwise, pick a sensible place and say where. Your human partner's
+preferences override both.
 
 **Builder check:** dispatch a fresh subagent with
 `builder-check-prompt.md` in this directory. When you tell your human
@@ -208,7 +220,7 @@ software, invoke writing-plans and no other skill.
 
 | Thought | Reality |
 |---------|---------|
-| "I'll offer options to save them effort" | Options steer. Ask them to describe it first. |
+| "I'll offer a menu before I know why" | Get their intent in their own words first; then compare concrete choices. |
 | "I'll fill in sensible defaults" | Good. Say them out loud. A default they never heard is one they couldn't reject. |
 | "I should explain the process first" | Ask your question. The process shows itself. |
 | "They said 'sounds good' to the idea" | Approval covers what you showed them. A description you haven't written isn't approved. |
@@ -238,5 +250,5 @@ starting the server.
 
 ---
 
-Adapted from [obra/superpowers](https://github.com/obra/superpowers) v7.0.1
+Adapted from [obra/superpowers](https://github.com/obra/superpowers) v7.0.2
 (MIT, Copyright (c) 2025 Jesse Vincent; see `LICENSE`).

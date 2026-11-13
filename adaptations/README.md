@@ -28,8 +28,10 @@ Why each adaptation exists:
 
 - `brainstorming`: upstream's trigger is "You MUST use this before any creative
   work"; this one triggers when a request leaves the goal, the audience or the
-  constraints unclear. The v7.0.1 review adopts context inspection before questions,
-  context-specific questions and reasoned approach comparisons. It retains the
+  constraints unclear. The v7.0.2 review adopts context inspection before questions,
+  questions only for unresolved material choices, respect for settled decisions,
+  delegated implementation choices, text sketches and the relative project-path
+  fix in the visual server. It retains the
   existing small-change-in-chat workflow instead of upstream's mandatory design
   document, approach-selection and writing-plan gates for every change. It also
   preserves explicit opt-out and uses plain skill names. User authorization and
